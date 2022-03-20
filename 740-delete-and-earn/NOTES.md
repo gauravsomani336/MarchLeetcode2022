@@ -1,1 +1,1 @@
-​
+Here we have first Created an Frequency array to store count of elements and then 0/1 knapsack problem is implemented
