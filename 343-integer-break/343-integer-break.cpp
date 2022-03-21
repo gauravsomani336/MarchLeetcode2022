@@ -1,9 +1,10 @@
 class Solution {
 public:
     int integerBreak(int n) {
-       return solve(1,n,0) ;
+        vector<vector<int>>dp(n+1,vector<int>(n+1,-1));
+       return solve(1,n,0,dp) ;
     }
-    int solve(int cur, int amount,int k)
+    int solve(int cur, int amount,int k, vector<vector<int>>&dp)
     {
         // if(amount<0)
         // {
@@ -18,14 +19,19 @@ public:
             return 0;
         }
         
+        if(dp[cur][amount]!=-1)
+        {
+            return dp[cur][amount];
+        }
+        
         int consider=0;
         
         if(cur <= amount)
         {
-            consider=cur* solve(cur,amount-cur,k+1);
+            consider=cur* solve(cur,amount-cur,k+1,dp);
         }
-        int notConsider=solve(cur+1,amount,k);
+        int notConsider=solve(cur+1,amount,k,dp);
         
-        return max(consider,notConsider);
+        return dp[cur][amount]= max(consider,notConsider);
     }
 };
